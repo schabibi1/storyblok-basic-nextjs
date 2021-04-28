@@ -4,69 +4,14 @@ import styles from '../styles/Home.module.css'
 // The Storyblok Client
 import Storyblok from "../lib/storyblok"
 import DynamicComponent from '../components/DynamicComponent'
+// 👀👀👀 Live preview 👀👀👀
+import useStoryblok from "../lib/storyblok-hook"
 
-// export default function Home() {
 export default function Home(props) {
-  const story = props.story
+  // 👀👀👀 useStoryblok hook 👀👀👀
+  const story = useStoryblok(props.story)
   return (
     <div className={styles.container}>
-      {/* <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer> */}
-
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -87,6 +32,8 @@ export default function Home(props) {
   )
 }
 
+// getStaticProps will be called at build time on server-side
+// won't be called on client-side
 export async function getStaticProps(context) {
   // the slug of the story
   let slug = "home"
@@ -106,7 +53,7 @@ export async function getStaticProps(context) {
   // loads the story from the Storyblok API
   let { data } = await Storyblok.get(`cdn/stories/${slug}`, params)
 
-  // return the story from Storyblok and whether preview mode is active
+  // return the story at build time from Storyblok & whether preview mode is active
   return {
     props: {
       story: data ? data.story : false,
