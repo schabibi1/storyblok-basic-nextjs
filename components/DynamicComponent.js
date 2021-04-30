@@ -1,9 +1,13 @@
 import SbEditable from 'storyblok-react'
 import Teaser from './Teaser'
+import Grid from './Grid'
+import Feature from './Feature'
 
 // resolve Storyblok components to Next.js components
 const Components = {
   'teaser': Teaser,
+  'grid': Grid,
+  'feature': Feature
 }
 
 const DynamicComponent = ({blok}) => {
