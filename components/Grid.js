@@ -3,11 +3,13 @@ import DynamicComponent from './DynamicComponent'
 import SbEditable from 'storyblok-react'
 
 const Grid = ({blok}) => {
-  console.log(blok)
+  console.log(blok.component)
+  console.log(blok.columns[0].name)
   return (
-    <SbEditable content={blok} key={blok._uid}>
-      <div />
-      {/* <DynamicComponent>{blok.component}</DynamicComponent> */}
+    <SbEditable content={blok}>
+      <DynamicComponent blok={blok.component}>
+        {blok.columns[0].name}
+      </DynamicComponent>
     </SbEditable>
   )
 }

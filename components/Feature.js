@@ -2,14 +2,10 @@ import React from 'react'
 import SbEditable from 'storyblok-react'
 
 const Feature = ({blok}) => {
-  const columns = blok.columns
+  console.log(blok.columns.name);
   return (
-    <SbEditable content={blok} key={blok._uid}>
-      <ul>
-        <li>
-          {/* {columns.map(column => column.name)} */}
-        </li>
-      </ul>
+    <SbEditable content={blok}>
+      {blok.name}
     </SbEditable>
   )
 }
