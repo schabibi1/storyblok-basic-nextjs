@@ -1,9 +1,8 @@
 export default async function preview(req, res) {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
-  // must be process.env.MY_SECRET_TOKEN👇
   if (
-    req.query.secret !== 'Qs4DvoOQIwGCdIgwOhb3DQtt' ||
+    req.query.secret !== process.env.NEXT_PUBLIC_STORYBLOK_API_TOKEN ||
     !req.query.slug
   ) {
     return res.status(401).json({ message: 'Invalid token' })
